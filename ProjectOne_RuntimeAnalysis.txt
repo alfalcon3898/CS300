@@ -1,4 +1,4 @@
-// Pseudocode and Runtime/Memory Analysis - Project One
+// Pseudocode and Runtime/Memory Analysis -Project One
 
 // Define Course Structure
 DEFINE STRUCT Course
