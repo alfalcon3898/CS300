@@ -1,0 +1,69 @@
+// Pseudocode and Runtime/Memory Analysis - Project One
+
+// Define Course Structure
+DEFINE STRUCT Course
+    courseNumber         // example: "CSCI200"
+    courseTitle          // example: "Data Structures"
+    prerequisites        // list of strings (["CSCI100", "CSCI101"])
+
+// Create a Vector to Hold All Courses
+CREATE a vector called courseList to store all Course objects
+
+// Open the File
+OPEN the course file ("courses.txt")
+IF the file doesn't open
+    PRINT "Error opening file"
+    STOP the program
+
+// Read and Parse the File
+FOR EACH line in the file
+    SPLIT the line by commas into tokens
+    IF there are less than 2 tokens
+        PRINT "Invalid line format"
+        CONTINUE
+    CREATE a new Course
+    SET courseNumber to tokens[0]
+    SET courseTitle to tokens[1]
+    FOR EACH token from index 2 onward
+        ADD token to prerequisites
+    ADD the Course to courseList
+
+// Validate Prerequisites
+FOR EACH Course in courseList
+    FOR EACH prerequisite in Course.prerequisites
+        SET found = false
+        FOR EACH course in courseList
+            IF course.courseNumber matches prerequisite
+                SET found = true
+        IF found is false
+            PRINT "Missing prerequisite: " + prerequisite
+
+// Function to Search and Print Course Info
+FUNCTION searchCourse(courseNumber)
+    FOR EACH course in courseList
+        IF course.courseNumber matches courseNumber
+            PRINT courseNumber and courseTitle
+            IF prerequisites list is empty
+                PRINT "Prerequisites: None"
+            ELSE
+                FOR EACH prereq in prerequisites
+                    PRINT prereq
+            END FUNCTION
+    PRINT "Course not found"
+
+// Runtime & Memory Analysis Summary
+- Vector:
+  * Insert: O(1) average, O(n) worst (when resizing)
+  * Search: O(n)
+  * Memory: Grows dynamically, but holds all objects in one structure
+
+- Hash Table:
+  * Insert: O(1) average, O(n) worst (due to collisions)
+  * Search: O(1) average, O(n) worst
+  * Memory: Extra space for buckets and chaining (or probing)
+
+- Binary Search Tree:
+  * Insert: O(log n) average, O(n) worst (unbalanced)
+  * Search: O(log n) average, O(n) worst
+  * Print Sorted: O(n) via in-order traversal
+  * Memory: Pointers add slight overhead, but scalable and efficient
